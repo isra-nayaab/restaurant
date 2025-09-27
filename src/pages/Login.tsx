@@ -30,9 +30,27 @@ const Login = () => {
   };
 
   return (
-    <Flex minH="100vh" align="center" justify="center" bg="gray.50" px={4}>
-      <Box bg="white" p={8} rounded="lg" shadow="md" width="100%" maxW="md">
-        <Heading mb={6} textAlign="center" size="lg">
+  <Flex
+  minH="100vh"
+  align="center"
+  justify="center"
+  px={4}
+  bgImage="url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80')"
+  bgSize="cover"
+  bgPos="center"
+>
+  <Box
+    bg="whiteAlpha.900"
+    p={8}
+    rounded="xl"
+    shadow="2xl"
+    backdropFilter="blur(6px)"
+    maxW="md"
+    w="100%"
+  >
+
+
+        <Heading mb={6} textAlign="center" color="#098f6eff">
           Login
         </Heading>
 
@@ -64,7 +82,7 @@ const Login = () => {
             </FormErrorMessage>
           </FormControl>
 
-          <Button type="submit" colorScheme="teal" width="100%">
+          <Button type="submit" colorScheme="yellow" width="100%">
             Continue
           </Button>
         </form>

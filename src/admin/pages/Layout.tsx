@@ -24,7 +24,7 @@ export default function AdminLayout() {
                 style={({ isActive }) => ({
                     padding: "8px 12px",
                     borderRadius: "8px",
-                    backgroundColor: isActive ? "#319795" : "transparent",
+                    backgroundColor: isActive ? "#8f0909ff" : "transparent",
                     color: isActive ? "white" : "black",
                     textDecoration: "none",
                 })}
@@ -37,7 +37,7 @@ export default function AdminLayout() {
                 style={({ isActive }) => ({
                     padding: "8px 12px",
                     borderRadius: "8px",
-                    backgroundColor: isActive ? "#319795" : "transparent",
+                    backgroundColor: isActive ? "#8f0909ff" : "transparent",
                     color: isActive ? "white" : "black",
                     textDecoration: "none",
                 })}

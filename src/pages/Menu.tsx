@@ -1,4 +1,5 @@
 // src/pages/CustomerMenu.tsx
+// src/pages/CustomerMenu.tsx
 import { useEffect, useState } from "react";
 import {
   Box,
@@ -80,80 +81,110 @@ export default function CustomerMenu() {
 
   const activeCategory = categories.find((c) => c.id === selectedCat);
 
-  const getUrl = (item: MenuItem) => supabase.storage.from("isra-cafe").getPublicUrl(item.image_url).data.publicUrl;
+  const getUrl = (item: MenuItem) =>
+    supabase.storage.from("isra-cafe").getPublicUrl(item.image_url).data
+      .publicUrl;
 
   return (
     <>
       <Header />
 
-      <Flex h="100vh" overflow="hidden">
-      {/* Left category nav */}
-      <VStack
-        w="200px"
-        bg="gray.100"
-        p={4}
-        spacing={3}
-        align="stretch"
-        overflowY="auto"
+      <Flex
+        h="100vh"
+        overflow="hidden"
+        bgGradient="linear(to-r, #be9c7bff, #a7906eff)" // warm creamy gradient
       >
-        {categories.map((cat) => (
-          <Button
-            key={cat.id}
-            variant={cat.id === selectedCat ? "solid" : "ghost"}
-            colorScheme="teal"
-            justifyContent="flex-start"
-            onClick={() => setSelectedCat(cat.id)}
-          >
-            {cat.name}
-          </Button>
-        ))}
-      </VStack>
+        {/* Sidebar */}
+        <VStack
+          w="220px"
+          bgGradient="linear(to-b, #7c6b57ff, #aa917dff)"  // deep warm -brown
+          p={4}
+          spacing={3}
+          align="stretch"
+          overflowY="auto"
+          color="white"
+          shadow="xl"
+        >
+          {categories.map((cat) => (
+            <Button
+              key={cat.id}
+              variant={cat.id === selectedCat ? "solid" : "ghost"}
+              bg={cat.id === selectedCat ? "whiteAlpha.300" : "transparent"}
+              _hover={{ bg: "whiteAlpha.200", transform: "scale(1.05)" }}
+              justifyContent="flex-start"
+              rounded="lg"
+              transition="all 0.2s"
+              onClick={() => setSelectedCat(cat.id)}
+            >
+              {cat.name}
+            </Button>
+          ))}
+        </VStack>
 
-      {/* Right items grid */}
-      <Box flex="1" p={6} overflowY="auto">
-        <Text fontSize="2xl" mb={4} fontWeight="bold">
-          {activeCategory?.name}
-        </Text>
+        {/* Main content */}
+        <Box
+          flex="1"
+          p={6}
+          overflowY="auto"
+          bg="#fffaf0"                               // soft off-white background
+        >
+          <Text fontSize="3xl" mb={6} fontWeight="bold" color="brown.800">
+            {activeCategory?.name}
+          </Text>
 
-        <Flex wrap="wrap" gap={6}>
-          {activeCategory?.menu_item.map((item) => {
-            const count = cart[item.id]?.quantity || 0;
-            return (
-              <Box
-                key={item.id}
-                w="220px"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                shadow="sm"
-              >
-                <Image
-                  src={getUrl(item)}
-                  alt={item.name}
-                  w="100%"
-                  h="140px"
-                  objectFit="cover"
-                />
-                <Box p={4}>
-                  <Text fontWeight="semibold">{item.name}</Text>
-                  <Text>₹{item.price}</Text>
+          <Flex wrap="wrap" gap={6}>
+            {activeCategory?.menu_item.map((item) => {
+              const count = cart[item.id]?.quantity || 0;
+              return (
+                <Box
+                  key={item.id}
+                  w="220px"
+                  borderWidth="1px"
+                  borderRadius="xl"
+                  overflow="hidden"
+                  shadow="md"
+                  bg="white"
+                  _hover={{ shadow: "xl", transform: "translateY(-4px)" }}
+                  transition="all 0.2s"
+                >
+                  <Image
+                    src={getUrl(item)}
+                    alt={item.name}
+                    w="100%"
+                    h="150px"
+                    objectFit="cover"
+                  />
+                  <Box p={4}>
+                    <Text fontWeight="semibold" fontSize="lg" color="brown.700">
+                      {item.name}
+                    </Text>
+                    <Text color="gray.600">₹{item.price}</Text>
 
-                  <HStack mt={3}>
-                    <Button size="sm" onClick={() => removeItem(item)}>
-                      -
-                    </Button>
-                    <Text>{count}</Text>
-                    <Button size="sm" onClick={() => addItem(item)}>
-                      +
-                    </Button>
-                  </HStack>
+                    <HStack mt={3}>
+                      <Button
+                        size="sm"
+                        colorScheme="brown"
+                        variant="outline"
+                        onClick={() => removeItem(item)}
+                      >
+                        –
+                      </Button>
+                      <Text>{count}</Text>
+                      <Button
+                        size="sm"
+                        colorScheme="brown"
+                        onClick={() => addItem(item)}
+                      >
+                        +
+                      </Button>
+                    </HStack>
+                  </Box>
                 </Box>
-              </Box>
-            );
-          })}
-        </Flex>
-      </Box>
-    </Flex>
+              );
+            })}
+          </Flex>
+        </Box>
+      </Flex>
     </>
   );
 }
