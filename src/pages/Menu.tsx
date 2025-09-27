@@ -173,6 +173,7 @@ export default function CustomerMenu() {
                       <Button
                         size="sm"
                         colorScheme="brown"
+                        variant="outline"
                         onClick={() => addItem(item)}
                       >
                         +
